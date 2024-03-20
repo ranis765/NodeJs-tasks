@@ -1,49 +1,70 @@
-const fs = require('fs');
-const http = require('http');
-const TaskManager = require('./task-manager');
-const server = http.createServer((req, res) => {
-	fs.readFile('tasks.json', 'utf8', (err, data) => {
-		if (err) {
-			res.writeHead(500, { 'Content-Type': 'text/plain' });
-			res.end("Error reading file.");
-			return;
-		}
-		res.writeHead(200, { 'Content-Type': 'application/json' });
-		res.end(data);
-	});
+import express from 'express';
+import mongoose from 'mongoose';
+import {validateTaskData} from './middlewares/validateTaskData.js'
+
+const app = express();
+app.use(express.json());
+
+const PORT = process.env.PORT || 3001;
+
+app.get('/', (req, res) => {
+    res.send('Hello');
 });
 
-server.listen(3000, () => {
-	console.log("Server running at http://localhost:3000/");
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
 
 
 
-const taskManager = new TaskManager();
-taskManager.loadTasks('tasks.json');
 
-taskManager.addTask('задача добавлена', task => {
-	console.log(`задача добавлена : ${task.toString()}`);
+mongoose.connect('mongodb://127.0.0.1:27017/todo_list')
+    .then(() => console.log('db ok'))
+    .catch((err) => console.log('db error', err));
+
+
+
+const taskSchema = new mongoose.Schema({
+    id: String,
+    description: String,
+    status: String
 });
 
-taskManager.removeTask('задача удалена', task => {
-	console.log(`задача удалена : ${task.toString()}`);
+export const TaskModel = mongoose.model('Task', taskSchema);
+
+
+app.get('/tasks', async (req, res) => {
+    try {
+        const tasks = await TaskModel.find();
+        res.json(tasks);
+
+    } catch (err) {
+        res.status(500).send(err.mesage);
+    }
 });
 
-taskManager.addTask(6, 'написать диплом', 'не завершено');
-taskManager.removeTask(6);
+app.post('/tasks',validateTaskData, async (req, res) => {
+    try {
+        const newTask = new TaskModel(req.body);
+        const savedTask = await newTask.save();
+        res.status(201).json(savedTask);
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
+
+});
 
 
-// const express = require('express');
-// const app = express();
-// app.use(express.json());
-
-// const PORT = process.env.PORT || 3000;
-
-// app.get('/', (req, res) => {
-// 	res.send('Hello, Express!');
-// });
-
-// app.listen(PORT, () => {
-// 	console.log(`Server is running on port ${PORT}`);
-// });
+app.delete('/tasks/:id', async (req, res) => {
+    const id = req.params.id; // Получаем идентификатор задачи из параметров маршрута
+    try {
+        const task = await TaskModel.findById(id); // Используем findById для поиска задачи по id
+        if (!task) {
+            return res.status(404).send('Task not found'); // Возвращаем 404, если задача не найдена
+        }
+        await TaskModel.deleteOne({ _id: id }); // Удаляем задачу с помощью метода deleteOne
+        res.status(204).send(); // Отправляем успешный ответ без содержимого (No Content)
+    } catch (err) {
+        res.status(400).send(err.message); // Отправляем статус ошибки и сообщение об ошибке
+    }
+});
