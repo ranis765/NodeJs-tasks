@@ -1,30 +1,58 @@
 [
   {
-    "id": 1,
-    "description": "сделать дз",
-    "status": "завершено"
+    "_id": {
+      "$oid": "65fafcbbf5bc06f84dab59f9"
+    },
+    "title": "Пойти погулять",
+    "status": "backlog"
   },
   {
-    "id": 2,
-    "description": "Пройти собес",
-    "status": "не завершено"
+    "_id": {
+      "$oid": "65fafcbbf5bc06f84dab59fa"
+    },
+    "title": "Усториться на работу",
+    "status": "backlog"
   },
   {
-    "id": 3,
-    "description": "написать диплом",
-    "status": "в процессе"
+    "_id": {
+      "$oid": "65fafcbbf5bc06f84dab59fb"
+    },
+    "title": "Выучить JS",
+    "status": "active"
   },
- 
   {
-    "id": 4,
-    "description": "написать диплом",
-    "status": "не завершено"
+    "_id": {
+      "$oid": "65fafcbbf5bc06f84dab59fc"
+    },
+    "title": "Выучить React",
+    "status": "active"
   },
- 
   {
-    "id": 5,
-    "description": "написать диплом",
-    "status": "не завершено"
+    "_id": {
+      "$oid": "65fafcbbf5bc06f84dab59fd"
+    },
+    "title": "Разработать сервер на .NET (C#)",
+    "status": "done"
+  },
+  {
+    "_id": {
+      "$oid": "65fafd1dbe87c8cbf0ce851f"
+    },
+    "title": "Оптимизировать код на Vue.js",
+    "status": "done"
+  },
+  {
+    "_id": {
+      "$oid": "65fafdcbbe87c8cbf0ce8522"
+    },
+    "title": "Удалить ненужные файлы",
+    "status": "delete"
+  },
+  {
+    "_id": {
+      "$oid": "65fafeb4be87c8cbf0ce8524"
+    },
+    "title": "Очистить базу данных",
+    "status": "delete"
   }
-
 ]

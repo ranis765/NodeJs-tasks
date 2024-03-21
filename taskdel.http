@@ -1,2 +1,6 @@
-DELETE  http://localhost:3001/tasks/65fafdcbbe87c8cbf0ce8522
+DELETE  http://localhost:3001/tasks/delete
 Content-Type: application/json
+
+{
+    "id": ["65fc80723cdb8852adc52b9e","65fc80803cdb8852adc52ba0"]
+}
