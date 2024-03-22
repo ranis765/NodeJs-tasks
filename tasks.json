@@ -1,56 +1,56 @@
 [
   {
     "_id": {
-      "$oid": "65fafcbbf5bc06f84dab59f9"
+      "$oid": "1"
     },
     "title": "Пойти погулять",
     "status": "backlog"
   },
   {
     "_id": {
-      "$oid": "65fafcbbf5bc06f84dab59fa"
+      "$oid": "2"
     },
     "title": "Усториться на работу",
     "status": "backlog"
   },
   {
     "_id": {
-      "$oid": "65fafcbbf5bc06f84dab59fb"
+      "$oid": "3"
     },
     "title": "Выучить JS",
     "status": "active"
   },
   {
     "_id": {
-      "$oid": "65fafcbbf5bc06f84dab59fc"
+      "$oid": "4"
     },
     "title": "Выучить React",
     "status": "active"
   },
   {
     "_id": {
-      "$oid": "65fafcbbf5bc06f84dab59fd"
+      "$oid": "5"
     },
     "title": "Разработать сервер на .NET (C#)",
     "status": "done"
   },
   {
     "_id": {
-      "$oid": "65fafd1dbe87c8cbf0ce851f"
+      "$oid": "6"
     },
     "title": "Оптимизировать код на Vue.js",
     "status": "done"
   },
   {
     "_id": {
-      "$oid": "65fafdcbbe87c8cbf0ce8522"
+      "$oid": "7"
     },
     "title": "Удалить ненужные файлы",
     "status": "delete"
   },
   {
     "_id": {
-      "$oid": "65fafeb4be87c8cbf0ce8524"
+      "$oid": "8"
     },
     "title": "Очистить базу данных",
     "status": "delete"

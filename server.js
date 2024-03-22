@@ -54,31 +54,15 @@ app.post('/tasks', validateTaskData, async (req, res) => {
 
 });
 
-
-// app.delete('/tasks/:id', async (req, res) => {
-//     const id = req.params.id; // Получаем идентификатор задачи из параметров маршрута
-//     try {
-//         const task = await TaskModel.findById(id); // Используем findById для поиска задачи по id
-//         if (!task) {
-//             return res.status(404).send('Task not found'); // Возвращаем 404, если задача не найдена
-//         }
-//         await TaskModel.deleteOne({ _id: id }); // Удаляем задачу с помощью метода deleteOne
-//         res.status(204).send(); // Отправляем успешный ответ без содержимого (No Content)
-//     } catch (err) {
-//         res.status(400).send(err.message); // Отправляем статус ошибки и сообщение об ошибке
-//     }
-// });
-
-app.delete('/tasks/delete', async (req, res) => {
-	const ids = req.params.id; // Предполагается, что вы передаете массив ID в теле запроса
-	
+app.delete('/tasks/del', async (req, res) => {
+	const ids = req.body.id;
 	try {
-		const result = await TaskModel.deleteMany({ id: { $in: ids } });
-		
+		const result = await TaskModel.deleteMany({ _id: { $in: ids } });
 		if (result.deletedCount === 0) {
 			return res.status(404).send('Задачи не найдены');
 		}
-		res.status(204).send();	
+
+		res.status(204).send();
 	} catch (err) {
 		res.status(400).send(err.message);
 	}
